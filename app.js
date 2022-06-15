@@ -12,6 +12,7 @@ loadEventListeners();
 function loadEventListeners() {
   form.addEventListener('submit', addTask); //// Add task event
   taskList.addEventListener('click', removeTask); //// Remove task event
+  clearBtn.addEventListener('click', clearTasks); //// Clear task event
 }
 
 function addTask(e) { //* Add task function
@@ -42,5 +43,15 @@ function removeTask(e) { //// Remove task function
       e.target.parentElement.parentElement.remove();
     }
   }
+}
 
+function clearTasks() { //// Clear task function
+  //* Two ways to do this
+  //? First method
+  // taskList.innerHTML = ''; //* taskList is connected to .collection
+
+  //? Second method (Faster)
+  while (taskList.firstChild) { // While there is a child/list
+    taskList.removeChild(taskList.firstChild);
+  }
 }
