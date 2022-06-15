@@ -21,9 +21,9 @@ function addTask(e) { //* Add task function
   const li = document.createElement('li'); // Create li element. "Task"
   li.className = 'collection-item'; // Add class name to created li
   li.appendChild(document.createTextNode(taskInput.value)); // Create text node & append to li
-  const link = document.createElement('a'); //* Create new link element for clearing tasks
-  link.className = 'delete-item secondary-content'; //* Add class name. For materialize CSS we need secondary-content to put the link on the right of the content
-  link.innerHTML = '<i class = "fa fa-remove"></i>'; //* Add icon [X] HTML 
+  const link = document.createElement('a'); //* Create new link element for clearing tasks. [X]
+  link.className = 'delete-item secondary-content'; //* Add class name [X]. For materialize CSS we need secondary-content to put the link on the right of the content
+  link.innerHTML = '<i class = "fa fa-remove"></i>'; //* Add icon [X] 
   li.appendChild(link) //* Append link to li
 
   taskList.appendChild(li) // Append li to ul [collection]
@@ -34,9 +34,13 @@ function addTask(e) { //* Add task function
 }
 
 function removeTask(e) { //// Remove task function
-  // If function to target the [X] icon for 'click'
+  // If the parent element [<a> tag] contains the class name 'delete item'
+  //* This targets the [X] icon
   if (e.target.parentElement.classList.contains('delete-item')) {
-
+    if (confirm('Are You Sure?')) {
+      // deleteItem -> parentElement [<a> tag] -> parentElement [<li>]
+      e.target.parentElement.parentElement.remove();
+    }
   }
 
 }
