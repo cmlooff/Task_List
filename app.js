@@ -25,7 +25,7 @@ function addTask(e) { //* Add task function
   li.appendChild(document.createTextNode(taskInput.value)); // Create text node & append to li
   const link = document.createElement('a'); //* Create new link element for clearing tasks. [X]
   link.className = 'delete-item secondary-content'; //* Add class name [X]. For materialize CSS we need secondary-content to put the link on the right of the content
-  link.innerHTML = '<i class = "fa fa-car"></i>'; //* Add icon [X] 
+  link.innerHTML = '<i class = "fa fa-remove"></i>'; //* Add icon [X] 
   li.appendChild(link) //* Append link to li
 
   taskList.appendChild(li) // Append li to ul [collection]
@@ -60,7 +60,7 @@ function clearTasks() { //// Clear task function
 function filterTasks(e) {
   const text = e.target.value.toLowerCase(); // Give us w/e is being typed in
 
-  document.querySelectorAll('.collection.item').forEach(function (task) {
+  document.querySelectorAll('.collection-item').forEach(function (task) {
     const item = task.firstChild.textContent;
     if (item.toLowerCase().indexOf(text) != -1) {
       task.style.display = 'block';
@@ -68,4 +68,6 @@ function filterTasks(e) {
       task.style.display = 'none';
     }
   });
+
+  console.log(text);
 }
