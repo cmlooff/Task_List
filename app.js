@@ -26,13 +26,29 @@ function addTask(e) { //* Add task function
   const link = document.createElement('a'); //* Create new link element for clearing tasks. [X]
   link.className = 'delete-item secondary-content'; //* Add class name [X]. For materialize CSS we need secondary-content to put the link on the right of the content
   link.innerHTML = '<i class = "fa fa-remove"></i>'; //* Add icon [X] 
-  li.appendChild(link) //* Append link to li
 
+  li.appendChild(link) //* Append link to li
   taskList.appendChild(li) // Append li to ul [collection]
 
-  taskInput.value = ''; // Clear input
+  storeTaskInLocalStorage(taskInput.value); //? Store in Local Storage
 
+  taskInput.value = ''; // Clear input
   e.preventDefault(); // Prevent default behavior 
+}
+
+function storeTaskInLocalStorage(task) { //// Store task in LS
+  let tasks;
+  if (localStorage.getItem('tasks') === null) { // Initialize tasks
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+    //! Set tasks to w/e in local storage. But LS only stores strings
+    //! So have to use JSON.parse
+  }
+
+  tasks.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks)); // Have to stringify to store in LS
+
 }
 
 function removeTask(e) { //// Remove task function
@@ -68,6 +84,4 @@ function filterTasks(e) {
       task.style.display = 'none';
     }
   });
-
-  console.log(text);
 }
