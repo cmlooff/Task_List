@@ -81,8 +81,27 @@ function removeTask(e) { //// Remove task function
     if (confirm('Are You Sure?')) {
       // deleteItem -> parentElement [<a> tag] -> parentElement [<li>]
       e.target.parentElement.parentElement.remove();
+
+      // Remove from Local Storage
+      removeTaskFromLocalStorage(e.target.parentElement.parentElement);
     }
   }
+}
+
+function removeTaskFromLocalStorage(taskItem) {
+  let tasks;
+  if (localStorage.getItem('tasks') === null) { // Initialize tasks
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
+
+  tasks.forEach((task, index) => {
+    if (taskItem.textContent === task) {
+      tasks.splice(index, 1)
+    }
+  });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function clearTasks() { //// Clear task function
