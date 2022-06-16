@@ -13,6 +13,7 @@ function loadEventListeners() {
   form.addEventListener('submit', addTask); //// Add task event
   taskList.addEventListener('click', removeTask); //// Remove task event
   clearBtn.addEventListener('click', clearTasks); //// Clear task event
+  filter.addEventListener('keyup', filterTasks); //// Filters tasks
 }
 
 function addTask(e) { //* Add task function
@@ -54,4 +55,16 @@ function clearTasks() { //// Clear task function
   while (taskList.firstChild) { // While there is a child/list
     taskList.removeChild(taskList.firstChild);
   }
+}
+
+function filterTasks(e) {
+  const text = e.target.value.toLowerCase(); // Give us w/e is being typed in
+  document.querySelectorAll('.collection.item').forEach(task => { // We can use forEach b/c querySelectorAll returns a node list.
+    const item = task.firstChild.textContent;
+    if (item.toLowerCase().indexOf(text) != -1) {
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'block';
+    }
+  });
 }
